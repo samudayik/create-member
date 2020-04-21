@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - go build
+      - export BUCKET=hello-go-lambda-deployment-artifacts
+      - aws cloudformation package --template-file template.yml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
+artifacts:
+  type: zip
+  files:
+    - template.yml
+    - outputtemplate.yml
+
